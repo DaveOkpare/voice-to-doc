@@ -1,5 +1,6 @@
 streamlit
+instructor
 openai
 tiktoken
-instructor
 assemblyai
+python-dotenv
