@@ -11,7 +11,13 @@ aai.settings.api_key = os.getenv("ASSEMBLYAI_API_KEY")
 
 transcriber = aai.Transcriber()
 
-audio = st.file_uploader("Upload an audio file", type=["mp3"])
+tab1, tab2 = st.tabs(["Upload", "Record"])
+
+with tab1:
+    audio = st.file_uploader("Upload an audio file", type=["mp3"])
+
+with tab2:
+    pass
 
 if audio is not None:
     with NamedTemporaryFile(suffix="mp3") as temp:
