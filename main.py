@@ -19,12 +19,23 @@ with tab1:
 with tab2:
     pass
 
-if audio is not None:
+def get_transcript():
     with NamedTemporaryFile(suffix="mp3") as temp:
         temp.write(audio.getvalue())
         temp.seek(0)
         transcript = transcriber.transcribe(temp.name)
-        st.write(transcript.text)
+        return transcript
+
+
+def process_download(dataframe):
+    doctype = st.radio("Choose file format", ["CSV (.csv)", "JSON (.json)"])
+    if doctype == "CSV (.csv)":
+        file = dataframe.to_csv(index=False)
+        st.download_button("Download", data=file, file_name="streamlit_download.csv")
+    elif doctype == "JSON (.json)":
+        file = dataframe.to_json(orient="records")
+        st.download_button("Download", data=file, file_name="streamlit_download.json")
+
 
 
 
